@@ -30,13 +30,20 @@ def computeProbs(n, s, plus=0, extra=None):
     return out
 
 def chart(rolls):
+    total = []
+    boundMin = 100
+    boundMax = 0
     for roll in rolls:
         nStr,sStr = roll.split('d')
         n = int(nStr)
         s = int(sStr)
         x = computeProbs(n,s)
         # have to add this line to fix the automatic bins
-        bins = range(min(x), max(x)+2)
-        plt.hist(x, bins=bins, label=roll)
+        boundMin = min(min(x),boundMin)
+        boundMax = max(max(x),boundMax)
+        total.append(x)
+
+    bins = range(boundMin, boundMax+2)
+    plt.hist(total, bins=bins, label=rolls)
     plt.legend(loc='upper right')
     plt.show()
