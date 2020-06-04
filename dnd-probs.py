@@ -35,6 +35,8 @@ def chart(rolls):
         n = int(nStr)
         s = int(sStr)
         x = computeProbs(n,s)
-        plt.hist(x, label=roll)
+        # have to add this line to fix the automatic bins
+        bins = range(min(x), max(x)+2)
+        plt.hist(x, bins=bins, label=roll)
     plt.legend(loc='upper right')
     plt.show()
